@@ -1,2 +1,2 @@
 # algorithm
-Basic algo implementation golang and python
+Basic algo implementation in python
