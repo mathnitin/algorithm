@@ -40,7 +40,7 @@ def infixToPostfix(input):
     operatorStack = []
     for char in input:
         # print "Char: ", char
-        if char.isalpha() == True:
+        if char.isalnum():
             # If  character is an operand, output it. 
             output += char
         else:
