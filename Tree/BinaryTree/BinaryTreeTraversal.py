@@ -18,9 +18,6 @@ Breadth First or Level Order Traversal
 1 2 3 4 5 6 7
 '''
 
-from ds.Stack import Stack
-from ds.Queue import Queue
-
 class Node():
     def __init__(self, data):
         self.data = data
@@ -32,23 +29,21 @@ class Tree():
     def __init__(self, rootNode):
         self.root = rootNode
 
-    def __breadthFirstTraversal(self, node):
-        if node.left is not None:
-            print node.left.data,
-        if node.right is not None:
-            print node.right.data,
-        if node.left is not None:
-            self.__breadthFirstTraversal(node.left)
-        if node.right is not None:
-            self.__breadthFirstTraversal(node.right)
-
     def breadthFirstTraversal(self):
         tempNode = self.root
         if tempNode == None:
             return
-        print tempNode.data,
-        self.__breadthFirstTraversal(tempNode)
+        thislevel = [tempNode]
+        while thislevel:
+            nextlevel = list()
+            for n in thislevel:
+                print n.data,
+                if n.left: nextlevel.append(n.left)
+                if n.right: nextlevel.append(n.right)
+            print
+            thislevel = nextlevel
 
+    
     def __preOrderTraversal(self, node):
         if node is not None:
             print node.data,
@@ -63,40 +58,34 @@ class Tree():
             return
         self.__preOrderTraversal(tempNode)
 
-    def __postOrderTraversal(self, node, stack):
+    def __postOrderTraversal(self, node):
         if node:
             if node.left:
-                stack.push(node.left)
-                self.__postOrderTraversal(node.left, stack)
+                self.__postOrderTraversal(node.left)
             if node.right:
-                stack.push(node.right)
-                self.__postOrderTraversal(node.right, stack)
+                self.__postOrderTraversal(node.right)
             print node.data,
     
     def postOrderTraversal(self):
         tempNode = self.root
         if tempNode == None:
             return
-        stack = Stack()
-        self.__postOrderTraversal(tempNode, stack)
+        self.__postOrderTraversal(tempNode)
 
-    def __inOrderTraversal(self, node, stack):
+    def __inOrderTraversal(self, node):
         if node:
             if node.left:
-                stack.push(node.left)
-                self.__inOrderTraversal(node.left, stack)
+                self.__inOrderTraversal(node.left)
             print node.data,
             if node.right:
-                stack.push(node.right)
-                self.__inOrderTraversal(node.right, stack)
+                self.__inOrderTraversal(node.right)
     
     def inOrderTraversal(self):
         tempNode = self.root
         if tempNode == None:
             return
-        stack = Stack()
-        self.__inOrderTraversal(tempNode, stack)
-
+        self.__inOrderTraversal(tempNode)
+    
 
 if __name__=="__main__":
     n1 = Node(1)

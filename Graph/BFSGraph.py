@@ -28,7 +28,6 @@ class Graph():
         self.graph[node].append(child)
 
     def printBFS(self, startNode):
-        print "\n"
         childNodes = []
         for i in startNode:
             if i in self.graph and i not in self.visitedNodes:

@@ -8,6 +8,7 @@ Regular quicksort  O(n^2)
 
 import random
 
+'''
 def quickSortRand(arr, low, high):
     if low < high:
         pi = partitionRand(arr, low, high)
@@ -26,7 +27,7 @@ def partitionRand(arr, low, high):
             arr[i], arr[j] = arr[j], arr[i]
     arr[i], arr[low] = arr[low], arr[i]
     return i
-
+'''
 
 def quickSort(arr, low, high):
     if low < high:
@@ -50,5 +51,5 @@ def partition(arr, low, high):
 if __name__ == "__main__":
     arr = [6,10,13,5,8,3,2,11]
     print arr
-    quickSortRand(arr, 0, (len(arr)-1))
+    quickSort(arr, 0, (len(arr)-1))
     print arr

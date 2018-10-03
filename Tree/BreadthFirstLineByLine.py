@@ -15,8 +15,6 @@ Breath First Traversal or Level Order Traversal Line by line
 4 5 6 7
 '''
 
-from ds.Queue import Queue
-
 class Node():
     def __init__(self, data):
         self.data = data
@@ -28,26 +26,25 @@ class Tree():
     def __init__(self, rootNode):
         self.root = rootNode
 
-    def __breadthFirstTraversalLineByLine(self, queue):
-        newQueue = Queue()
-        while not queue.isEmpty:
-            elem = queue.dequeue()
-            print elem.data,
-            if elem.left:
-                newQueue.enqueue(elem.left)
-            if elem.right:
-                newQueue.enqueue(elem.right)
-        if not newQueue.isEmpty:
-            print ""
-            self.__breadthFirstTraversalLineByLine(newQueue)
-
-    def breadthFirstTraversalLineByLine(self):
-        tempNode = self.root
-        if tempNode == None:
+    def __printHandler(self, curLevel):
+        if len(curLevel) == 0:
             return
-        queue = Queue()
-        queue.enqueue(tempNode)
-        self.__breadthFirstTraversalLineByLine(queue)
+        nextLevel = []
+        while curLevel:
+            curElem = curLevel[0]
+            del curLevel[0]
+            if curElem.left:
+                nextLevel.append(curElem.left)
+            if curElem.right:
+                nextLevel.append(curElem.right)
+            print curElem.data,
+        self.__printHandler(nextLevel)
+        
+    def breadthFirstTraversalLineByLine(self):
+        #Write code Here
+        curLevel = []
+        curLevel.append(self.root)
+        self.__printHandler(curLevel)
 
 if __name__=="__main__":
     n1 = Node(1)
