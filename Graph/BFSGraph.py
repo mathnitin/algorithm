@@ -22,23 +22,22 @@ from collections import defaultdict
 class Graph():
     def __init__(self):
         self.graph = defaultdict(list)
-        self.visitedNodes = []
 
     def addEdge(self, node, child):
         self.graph[node].append(child)
 
     def printBFS(self, startNode):
-        childNodes = []
-        for i in startNode:
-            if i in self.graph and i not in self.visitedNodes:
-                print i,
-                self.visitedNodes.append(i)
-                for x in self.graph[i]:
-                    childNodes.append(x)
-        if len(childNodes) == 0:
-            return
-        else:
-            self.printBFS(childNodes)
+        visitedNode = []
+        nodes = []
+        nodes.append(startNode)
+        while len(nodes) > 0:
+            curNode = nodes[0]
+            del nodes[0]
+            if curNode in self.graph and curNode not in visitedNode:
+                visitedNode.append(curNode)
+                nodes.extend(self.graph[curNode])
+                print curNode,
+
 
 if __name__ == "__main__":
     tree = Graph()
@@ -49,4 +48,4 @@ if __name__ == "__main__":
     tree.addEdge(2, 3)
     tree.addEdge(3, 3)
 
-    tree.printBFS([2])
+    tree.printBFS(2)
